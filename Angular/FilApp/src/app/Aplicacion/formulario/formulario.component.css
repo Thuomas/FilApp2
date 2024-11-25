@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 300px;
+  background-color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+.form-group {
+  text-align: center;
+  }
+  .fondo{
+    background-image: url('src\assets\fontLogin.jpg');
+    display: flex;
+    justify-content: center;
+  align-items: center;
+  }

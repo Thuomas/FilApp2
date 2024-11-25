@@ -1,0 +1,15 @@
+
+  
+  .container {    
+    border: solid 1px gray;
+    padding: 25px;
+    
+  }
+  h2{
+    text-align: center;
+    color:  white;
+    margin-left: -25px;
+    margin-right: -25px;
+    margin-top: -25px;
+    background-color: rgb(50, 102, 180);
+  }

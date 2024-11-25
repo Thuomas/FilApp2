@@ -1,0 +1,42 @@
+<div class="container">
+  <span>
+    <h2> Lista de Clientes en espera </h2>
+  </span>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Hora de ingreso</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Motivo</th>
+        <th scope="col">Marcar como prioridad</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <!-- Aca tengo que hacer un foreach por la lista de turnos y 
+    mostrar la info que requiera -->
+    <tbody *ngIf="clientes.length>0">
+
+      <tr *ngFor="let cliente of clientes">
+        <td>{{cliente.ingreso}}</td>
+        <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+        <td>{{cliente.motivo}}</td>
+        <td><input type="checkbox"></td>
+        <td><button class="btn btn-link">Eliminar</button></td>
+      </tr>
+
+    </tbody>
+
+  </table>
+  <div *ngIf="clientes.length<=0" class="container2">
+    <div class="row mb-1">
+      <div class="col-md-8">
+        <div class="card text-center">
+          <div class="card-body">
+            <h2 class="card-title">Todo tranquilo... por ahora</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
