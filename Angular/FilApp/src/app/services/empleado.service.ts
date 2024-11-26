@@ -11,7 +11,10 @@ export class EmpleadoService {
 
 private urlApi= "/api/empleados.php";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    
+  }  
+  usuarioLogeado: number=-1;
 
   getAllEmpleados(): Observable<Empleado>{
     return this.http.get<Empleado>(this.urlApi);

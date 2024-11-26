@@ -32,11 +32,9 @@ export class InicioComponent {
       for (let cliente of this.clientes) {
         if (cliente.enEspera == 2) {
           this.sigCliente = cliente;
+          break;
         }
       }
-      let indice = this.clientes.length
-      console.log(indice)
-      this.sigCliente= this.clientes[0]
     }
   }
 
@@ -46,16 +44,23 @@ export class InicioComponent {
       for (let cliente of this.clientes) {
         if (cliente.enEspera == 1) {
           this.sigCliente = cliente;
+          break;
         }
       }
     }
   }
 
   llamar() {
+    this.llamarSig();
+    console.dir(this.sigCliente)
     this.llamarPrioridad();
    // this.llamarSig();
-    console.log("veo si me trajo algun cliente mi ensalada de codigo")
+    console.log("veo si me trajo algun cliente con prioridad")
     console.dir(this.sigCliente)
+    let indice =this.sigCliente.id;
+    //.sigCliente.enEspera=3;
+    //this.clienteService.updateCliente(indice, this.sigCliente)
+    this.clienteService.deleteCliente(indice)
   }
 
 

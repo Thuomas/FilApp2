@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Informacion } from 'src/app/models/Empleado';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +11,12 @@ export class HomeComponent {
 
   isSidebarVisible = false;
   userName = 'Aquiles Brinco';
+  constructor(public empleadoService: EmpleadoService){
+    
+  }
+  ObtenerUsuarioLog(){
+    //TODO agregar la logica
+  }
 
   toggleSidebar() {
     this.isSidebarVisible = !this.isSidebarVisible;
