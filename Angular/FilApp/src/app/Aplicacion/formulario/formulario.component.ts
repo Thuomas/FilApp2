@@ -44,7 +44,7 @@ export class FormularioComponent {
       console.log(clave)
       for (let empleado of this.empleados) {
         if (empleado.Usuario == usuario && empleado.pass == clave) {
-          this.empleadoService.usuarioLogeado = empleado.id
+          this.empleadoService.usuarioLogeado = empleado
           this.Ingresar();
         }
       }

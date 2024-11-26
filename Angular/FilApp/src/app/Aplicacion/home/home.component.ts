@@ -10,13 +10,11 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 export class HomeComponent {
 
   isSidebarVisible = false;
-  userName = 'Aquiles Brinco';
+  usuarioLogueado :Informacion | null;
   constructor(public empleadoService: EmpleadoService){
-    
+    this.usuarioLogueado = this.empleadoService.usuarioLogeado
   }
-  ObtenerUsuarioLog(){
-    //TODO agregar la logica
-  }
+  
 
   toggleSidebar() {
     this.isSidebarVisible = !this.isSidebarVisible;
