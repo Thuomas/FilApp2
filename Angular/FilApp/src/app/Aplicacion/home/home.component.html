@@ -7,20 +7,20 @@
     <div class="sidebar-header">
       <h3>FillApp</h3>
     </div>
-    <div class="sidebar-body"->
+    <div class="sidebar-body">
 
       <ul class="list-unstyled components">
         <li>
           <a routerLink="inicio"> <i class="fs-5 bi-house"></i> Inicio </a>
 
         </li>
-        <li>
+        <li *ngIf="usuarioLogeado?.idCargo === 3">
           <a routerLink="lista-empleados"> <i class="bi bi-people-fill"></i> Empleados</a>
         </li>
         <li>
           <a href="#"> <i class="bi bi-file-bar-graph"></i> Métricas</a>
         </li>
-        <li>
+        <li *ngIf="usuarioLogeado?.idCargo === 3">
           <a routerLink="lista-turnos"> <i class="bi bi-people-fill"></i> Lista de turnos</a>
         </li>
       </ul>
