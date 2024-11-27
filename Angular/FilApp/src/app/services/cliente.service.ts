@@ -34,6 +34,8 @@ export class ClienteService {
     return this.http.post<Cliente>(this.urlApi, empleado)
   }
 
+  //TODO: modificar parametros para que reciba id del cliente a modificar
+  //quien lo antiende (string) y el estado de enEspera pasarlo a 3
   updateCliente(id: number, empleado: Info): Observable<Cliente>{
     return this.http.put<Cliente>(this.urlApi,{id, empleado} );
   }
