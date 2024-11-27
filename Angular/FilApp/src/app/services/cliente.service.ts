@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Cliente, Informacion } from '../models/Cliente';
+import { Cliente, Info } from '../models/Cliente';
 
 import { catchError, map } from 'rxjs/operators';
 
@@ -11,6 +11,9 @@ import { catchError, map } from 'rxjs/operators';
 export class ClienteService {
 
   private urlApi = "/api/clientes.php";
+  //esta url es para hacer el update de cliente pero apunta a filapp2 (???!!!!
+  private urlApi2 = "http://localhost/filapp2/php/api/Clientes/Uclientesinicio.php";
+
   constructor(private http: HttpClient) {
   }
 
@@ -18,7 +21,7 @@ export class ClienteService {
     return this.http.get<Cliente>(this.urlApi);
   }
 
-  getClienteById(id: number): Observable<Informacion | undefined> {
+  getClienteById(id: number): Observable<Info | undefined> {
     return this.http.get<Cliente>(this.urlApi).pipe(
       map(response => response.data.find(cliente => cliente.id === id)),
       catchError(error => {
@@ -31,7 +34,7 @@ export class ClienteService {
     return this.http.post<Cliente>(this.urlApi, empleado)
   }
 
-  updateCliente(id: number, empleado: Informacion): Observable<Cliente>{
+  updateCliente(id: number, empleado: Info): Observable<Cliente>{
     return this.http.put<Cliente>(this.urlApi,{id, empleado} );
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Cliente, Informacion } from 'src/app/models/Cliente';
+import { Cliente, Info } from 'src/app/models/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class ListaTurnosComponent {
 
-  clientes: Informacion[]=[];
+  clientes: Info[]=[];
 
   constructor(public clienteService: ClienteService){
 

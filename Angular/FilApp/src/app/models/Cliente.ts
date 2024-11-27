@@ -1,9 +1,9 @@
 export interface Cliente {
     status: string
-    data: Informacion[]
+    data: Info[]
 }
 
-export interface Informacion {
+export interface Info {
     id: number
     nombre: string
     apellido: string

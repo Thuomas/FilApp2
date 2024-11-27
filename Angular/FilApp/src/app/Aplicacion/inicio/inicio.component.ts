@@ -1,6 +1,8 @@
 import { Component, ɵɵsetComponentScope } from '@angular/core';
-import { Cliente, Informacion } from 'src/app/models/Cliente';
+import { Cliente, Info } from 'src/app/models/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
+import { Informacion } from 'src/app/models/Empleado';
 
 @Component({
   selector: 'app-inicio',
@@ -9,12 +11,14 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class InicioComponent {
   isHovered = false;
-  clientes: Informacion[] = [];
-  sigCliente: Informacion;
+  clientes: Info[] = [];
+  sigCliente: Info;
+  usuarioLogueado :Informacion | null;
 
-  constructor(public clienteService: ClienteService) {
+  constructor(public clienteService: ClienteService, public empleadoService: EmpleadoService) {
     this.sigCliente = this.clientes[0];
     console.log(this.sigCliente)
+    this.usuarioLogueado = this.empleadoService.usuarioLogeado
   }
   ngOnInit(): void {
     this.llenarData();
