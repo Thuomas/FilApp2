@@ -4,5 +4,11 @@
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"
+    },
+    "/filapp2/api/*": {
+      "target": "http://localhost/filapp2/php",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
     }
 }
