@@ -19,7 +19,7 @@ export class FormularioComponent {
   constructor(public empleadoService: EmpleadoService, private router: Router) {
     this.loginForm = new FormGroup({
       usuario: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.minLength(5), Validators.required]),
+      //password: new FormControl('', [Validators.minLength(5), Validators.required]),
     });
 
   }
@@ -31,6 +31,7 @@ export class FormularioComponent {
   llenarData() {
     this.empleadoService.getAllEmpleados().subscribe(data => {
       this.empleados = data.data;
+      console.dir(this.empleados)
     })
   }
   EnviarFormulario() {
@@ -43,7 +44,7 @@ export class FormularioComponent {
       console.log(usuario)
       console.log(clave)
       for (let empleado of this.empleados) {
-        if (empleado.Usuario == usuario && empleado.pass == clave) {
+        if (empleado.Usuario == usuario /*&& empleado.pass == clave*/) {
           this.empleadoService.usuarioLogeado = empleado
           this.Ingresar();
         }
