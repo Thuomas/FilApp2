@@ -1,10 +1,11 @@
 
 <div class="container">
+    
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card text-center" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
                 <div class="card-body" *ngIf="clientes.length===0; else hayClientes">
-                    <h5 class="card-title">4 Empleados logueados</h5>
+                    <h5 class="card-title">Todo tranquilo</h5>
                     <i class="bi bi-person-circle fs-3"></i>
                 </div>
                 <ng-template #hayClientes (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
@@ -12,12 +13,12 @@
                         <h5 class="card-title">Llamar siguiente cliente </h5>
                         <a (click)="llamar()">
                             <i class="bi bi-person-plus-fill fs-1"></i>
-                        </a>
-                        
+                        </a>                        
                     </div>                    
                 </ng-template>
             </div>
         </div>
+        <!-- TODO hacer que si el cliente es null se muestre "Tomar descanso" -->
         <div class="col-md-4">
             <div class="card text-center" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
                 <div class="card-body">
@@ -36,7 +37,7 @@
         </div>
     </div> 
     <span></span>
-    <div class="row mb-4">
+    <div class="row mb-4" *ngIf="usuarioLogueado?.idCargo === 3">
         <div class="col-md-4">
             <div class="card text-center" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
                 <div class="card-body">
@@ -48,7 +49,7 @@
         <div class="col-md-4">
             <div class="card text-center" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
                 <div class="card-body">
-                    <h5 class="card-title">17 clientes atendidos</h5>
+                    <h5 class="card-title">Metricas</h5>
                     <i class="bi bi-person-circle fs-3"></i>
                 </div>
             </div>
