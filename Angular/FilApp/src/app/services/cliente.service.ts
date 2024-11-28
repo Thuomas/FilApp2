@@ -11,6 +11,7 @@ import { catchError, map } from 'rxjs/operators';
 export class ClienteService {
 
   private urlApi = "/api/Clientes/clientes.php";
+  private urlApiUpdate = "/api/Clientes/Uclientesinicio.php";
 
   constructor(private http: HttpClient) {
   }
@@ -37,16 +38,13 @@ export class ClienteService {
   // updateCliente(id: number, empleado: Info): Observable<Cliente>{
   //   return this.http.put<Cliente>(this.urlApi,{id, empleado} );
   // }
-  updateCliente(id: number, enEspera: number,usuarioDeAtencion?: string): Observable<any> {
+  updateCliente(id: number,  usuarioDeAtencion?: string ): Observable<any> {
     // Crear el objeto que enviaremos como payload
-    const payload = {
-      id,
-      usuarioDeAtencion,
-      enEspera,
-    };
+    const url = `${this.urlApiUpdate}?id=${id}&usuarioDeAtencion=${usuarioDeAtencion}`;
+  
   
     // Enviar la solicitud POST a la ruta relativa configurada en el proxy
-    return this.http.post(this.urlApi, payload).pipe(
+    return this.http.post(url, null).pipe(
       map((response: any) => {
         console.log('Actualización exitosa:', response);
         return response;

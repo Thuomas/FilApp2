@@ -62,24 +62,28 @@ export class InicioComponent {
    // this.llamarSig();
     console.log("veo si me trajo algun cliente con prioridad")
     console.dir(this.sigCliente)
-    let id =this.sigCliente.id;
+    //let id =this.sigCliente.id;
     //.sigCliente.enEspera=3;
     //this.clienteService.updateCliente(indice, this.sigCliente)
     this.actualizarCliente()
     console.log("use mi actualizarCliente")
+    this.llenarData()
     console.dir(this.clientes)
   }
 
   actualizarCliente() {
     const id = this.sigCliente.id; // ID del cliente
     const usuarioDeAtencion = this.usuarioLogueado?.Usuario; // Usuario que atiende
-    const enEspera = 3; // Estado a actualizar
-  
-    this.clienteService.updateCliente(id, enEspera, usuarioDeAtencion).subscribe({
+    const enEspera=2;
+    console.log("----------------------------")
+    console.log( "este es mi usuario de atencion:" + usuarioDeAtencion)
+    console.log("----------------------------")
+    console.log( "este es mi cliente id:" + id)
+    console.log("----------------------------")
+    this.clienteService.updateCliente(id, usuarioDeAtencion).subscribe({
       next: (response) => {
         if (response.status === 'success') {
           console.log('Cliente actualizado correctamente:', response.message);
-          console.log(this.clientes)
         } else {
           console.warn('Error al actualizar cliente:', response.message);
         }
