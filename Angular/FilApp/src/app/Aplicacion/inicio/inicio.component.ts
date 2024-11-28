@@ -35,7 +35,7 @@ export class InicioComponent {
   llamarPrioridad() {
     if (this.clientes.length > 0) {
       for (let cliente of this.clientes) {
-        if (cliente.enEspera == 2) {
+        if (cliente.enEspera == 1) {
           this.sigCliente = cliente;
           break;
         }
@@ -47,7 +47,7 @@ export class InicioComponent {
     this.llenarData()
     if (this.clientes.length > 0) {
       for (let cliente of this.clientes) {
-        if (cliente.enEspera == 1) {
+        if (cliente.enEspera == 0) {
           this.sigCliente = cliente;
           break;
         }
