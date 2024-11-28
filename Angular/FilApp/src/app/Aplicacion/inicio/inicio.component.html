@@ -1,20 +1,20 @@
-
 <div class="container">
-    
+
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card text-center" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
                 <div class="card-body" *ngIf="clientes.length===0; else hayClientes">
+                <!-- <div class="card-body" *ngIf="sigCliente.nombre == null; else hayClientes"> -->
                     <h5 class="card-title">Todo tranquilo</h5>
                     <i class="bi bi-person-circle fs-3"></i>
                 </div>
                 <ng-template #hayClientes (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
-                    <div class="card-body" >
+                    <div class="card-body">
                         <h5 class="card-title">Llamar siguiente cliente </h5>
                         <a (click)="llamar()">
                             <i class="bi bi-person-plus-fill fs-1"></i>
-                        </a>                        
-                    </div>                    
+                        </a>
+                    </div>
                 </ng-template>
             </div>
         </div>
@@ -35,9 +35,9 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
     <span></span>
-    <div class="row mb-4" *ngIf="usuarioLogueado?.idCargo === 3">
+    <div class="row mb-4" *ngIf="usuarioLogueado?.idCargo === 1 || usuarioLogueado?.idCargo===2">
         <div class="col-md-4">
             <div class="card text-center" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
                 <div class="card-body">
@@ -62,10 +62,10 @@
                 </div>
             </div>
         </div>
-    </div> 
-    
+    </div>
+
 </div>
-<div class="contenedor">
+<div class="contenedor" *ngIf="sigCliente.nombre!=null" >
     <div class="form-container">
         <div class="form-header">
             <h2>Datos Cliente</h2>
@@ -73,14 +73,17 @@
         <div class="form-body">
             <div class="form-group">
                 <input type="text" placeholder="" value={{sigCliente.nombre}}>
-                <input type="text"  value={{sigCliente.apellido}}>
+                <input type="text" value={{sigCliente.apellido}}>
             </div>
             <div class="form-group">
                 <input type="text" value={{sigCliente.motivo}}>
                 <input type="text" value={{sigCliente.mail}}>
             </div>
             <div class="form-group">
-                <input type="email" >
+                <input type="email">
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-danger" (click)="finTurno(sigCliente.id)"> Finalizar atencion </button>
             </div>
         </div>
     </div>

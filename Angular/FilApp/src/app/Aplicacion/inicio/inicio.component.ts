@@ -3,7 +3,6 @@ import { Cliente, Info } from 'src/app/models/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { Informacion } from 'src/app/models/Empleado';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -28,7 +27,7 @@ export class InicioComponent {
 
   llenarData() {
     this.clienteService.getAllClientes().subscribe(data => {
-      this.clientes = data.data;
+      this.clientes = data.data.filter(cliente =>cliente.enEspera<=1); //filtro para traer solo los clientees que estan en espera
     })
   }
 
@@ -57,29 +56,15 @@ export class InicioComponent {
 
   llamar() {
     this.llamarSig();
-    console.dir(this.sigCliente)
     this.llamarPrioridad();
-   // this.llamarSig();
-    console.log("veo si me trajo algun cliente con prioridad")
-    console.dir(this.sigCliente)
-    //let id =this.sigCliente.id;
-    //.sigCliente.enEspera=3;
-    //this.clienteService.updateCliente(indice, this.sigCliente)
     this.actualizarCliente()
-    console.log("use mi actualizarCliente")
     this.llenarData()
-    console.dir(this.clientes)
   }
 
   actualizarCliente() {
     const id = this.sigCliente.id; // ID del cliente
     const usuarioDeAtencion = this.usuarioLogueado?.Usuario; // Usuario que atiende
-    const enEspera=2;
-    console.log("----------------------------")
-    console.log( "este es mi usuario de atencion:" + usuarioDeAtencion)
-    console.log("----------------------------")
-    console.log( "este es mi cliente id:" + id)
-    console.log("----------------------------")
+    
     this.clienteService.updateCliente(id, usuarioDeAtencion).subscribe({
       next: (response) => {
         if (response.status === 'success') {
@@ -94,6 +79,20 @@ export class InicioComponent {
     });
   }
   
+  finTurno(id: number){
+    this.clienteService.finalizarTurno(id).subscribe({
+      next: (response) => {
+        if (response.status === 'success') {
+          console.log('Estado actualizado correctamente:', response.message);
+        } else {
+          console.warn('Error al actualizar estado:', response.message);
+        }
+      },
+      error: (error) => {
+        console.error('Error al actualizar estado:', error);
+      }
+    });
+  }
 
 
   onMouseEnter() {

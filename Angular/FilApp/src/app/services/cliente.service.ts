@@ -12,6 +12,7 @@ export class ClienteService {
 
   private urlApi = "/api/Clientes/clientes.php";
   private urlApiUpdate = "/api/Clientes/Uclientesinicio.php";
+  private urlApiFin = "/api/Clientes/Uclientesfin.php";
 
   constructor(private http: HttpClient) {
   }
@@ -33,15 +34,9 @@ export class ClienteService {
     return this.http.post<Cliente>(this.urlApi, empleado)
   }
 
-  //TODO: modificar parametros para que reciba id del cliente a modificar
-  //quien lo antiende (string) y el estado de enEspera pasarlo a 3
-  // updateCliente(id: number, empleado: Info): Observable<Cliente>{
-  //   return this.http.put<Cliente>(this.urlApi,{id, empleado} );
-  // }
-  updateCliente(id: number,  usuarioDeAtencion?: string ): Observable<any> {
-    // Crear el objeto que enviaremos como payload
-    const url = `${this.urlApiUpdate}?id=${id}&usuarioDeAtencion=${usuarioDeAtencion}`;
   
+  updateCliente(id: number,  usuarioDeAtencion?: string ): Observable<any> {    
+    const url = `${this.urlApiUpdate}?id=${id}&usuarioDeAtencion=${usuarioDeAtencion}`;
   
     // Enviar la solicitud POST a la ruta relativa configurada en el proxy
     return this.http.post(url, null).pipe(
@@ -55,6 +50,26 @@ export class ClienteService {
       })
     );
   }
+
+  finalizarTurno(id: number): Observable<any> {
+    // Usar la URL configurada en la propiedad urlApiFin
+    const url = `${this.urlApiFin}?id=${id}`;
+    
+    // Enviar la solicitud POST sin cuerpo
+    return this.http.post(url, null).pipe(
+      map((response: any) => {
+        console.log('Actualización exitosa:', response);
+        return response;
+      }),
+      catchError(error => {
+        console.error('Error al actualizar cliente enEspera:', error);
+        return of(error); // Manejar el error adecuadamente
+      })
+    );
+  }
+
+
+
 
   deleteCliente(id: number): Observable<Cliente>{
     return this.http.delete<Cliente>(`${this.urlApi}/${id}`);
