@@ -3,6 +3,7 @@ import { Cliente, Info } from 'src/app/models/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { Informacion } from 'src/app/models/Empleado';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -15,7 +16,7 @@ export class InicioComponent {
   sigCliente: Info;
   usuarioLogueado :Informacion | null;
 
-  constructor(public clienteService: ClienteService, public empleadoService: EmpleadoService) {
+  constructor(public clienteService: ClienteService, public empleadoService: EmpleadoService, private router: Router) {
     this.sigCliente = this.clientes[0];
     console.log(this.sigCliente)
     this.usuarioLogueado = this.empleadoService.usuarioLogeado
@@ -84,6 +85,7 @@ export class InicioComponent {
       next: (response) => {
         if (response.status === 'success') {
           console.log('Estado actualizado correctamente:', response.message);
+          this.router.navigate(['/home']);
         } else {
           console.warn('Error al actualizar estado:', response.message);
         }
