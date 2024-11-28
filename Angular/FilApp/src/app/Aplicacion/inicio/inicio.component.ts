@@ -3,6 +3,7 @@ import { Cliente, Info } from 'src/app/models/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { Informacion } from 'src/app/models/Empleado';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -61,11 +62,34 @@ export class InicioComponent {
    // this.llamarSig();
     console.log("veo si me trajo algun cliente con prioridad")
     console.dir(this.sigCliente)
-    let indice =this.sigCliente.id;
+    let id =this.sigCliente.id;
     //.sigCliente.enEspera=3;
     //this.clienteService.updateCliente(indice, this.sigCliente)
-    this.clienteService.deleteCliente(indice)
+    this.actualizarCliente()
+    console.log("use mi actualizarCliente")
+    console.dir(this.clientes)
   }
+
+  actualizarCliente() {
+    const id = this.sigCliente.id; // ID del cliente
+    const usuarioDeAtencion = this.usuarioLogueado?.Usuario; // Usuario que atiende
+    const enEspera = 3; // Estado a actualizar
+  
+    this.clienteService.updateCliente(id, enEspera, usuarioDeAtencion).subscribe({
+      next: (response) => {
+        if (response.status === 'success') {
+          console.log('Cliente actualizado correctamente:', response.message);
+          console.log(this.clientes)
+        } else {
+          console.warn('Error al actualizar cliente:', response.message);
+        }
+      },
+      error: (error) => {
+        console.error('Error al actualizar cliente:', error);
+      }
+    });
+  }
+  
 
 
   onMouseEnter() {

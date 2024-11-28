@@ -9,7 +9,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class EmpleadoService {
 
-  private urlApi = "/api/empleados.php";
+  private urlApi = "/api/Empleados/empleados.php";
 
   constructor(private http: HttpClient) {
 

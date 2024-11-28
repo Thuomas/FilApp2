@@ -10,9 +10,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class ClienteService {
 
-  private urlApi = "/api/clientes.php";
-  //esta url es para hacer el update de cliente pero apunta a filapp2 (???!!!!
-  private urlApi2 = "http://localhost/filapp2/php/api/Clientes/Uclientesinicio.php";
+  private urlApi = "/api/Clientes/clientes.php";
 
   constructor(private http: HttpClient) {
   }
@@ -36,8 +34,28 @@ export class ClienteService {
 
   //TODO: modificar parametros para que reciba id del cliente a modificar
   //quien lo antiende (string) y el estado de enEspera pasarlo a 3
-  updateCliente(id: number, empleado: Info): Observable<Cliente>{
-    return this.http.put<Cliente>(this.urlApi,{id, empleado} );
+  // updateCliente(id: number, empleado: Info): Observable<Cliente>{
+  //   return this.http.put<Cliente>(this.urlApi,{id, empleado} );
+  // }
+  updateCliente(id: number, enEspera: number,usuarioDeAtencion?: string): Observable<any> {
+    // Crear el objeto que enviaremos como payload
+    const payload = {
+      id,
+      usuarioDeAtencion,
+      enEspera,
+    };
+  
+    // Enviar la solicitud POST a la ruta relativa configurada en el proxy
+    return this.http.post(this.urlApi, payload).pipe(
+      map((response: any) => {
+        console.log('Actualización exitosa:', response);
+        return response;
+      }),
+      catchError(error => {
+        console.error('Error al actualizar cliente:', error);
+        return of(error); // Devolver un observable con el error para manejarlo adecuadamente
+      })
+    );
   }
 
   deleteCliente(id: number): Observable<Cliente>{

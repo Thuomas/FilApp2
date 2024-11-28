@@ -22,7 +22,7 @@ export class ListaTurnosComponent {
 
   llenarData(){
     this.clienteService.getAllClientes().subscribe(data=>{
-      this.clientes = data.data.filter( cliente=>cliente.enEspera <=2 );
+      this.clientes = data.data.filter( cliente=>cliente.enEspera <=1 );
     }
     )
   }
