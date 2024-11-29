@@ -14,9 +14,14 @@ export class InicioComponent {
   isHovered = false;
   clientes: Info[] = [];
   sigCliente: Info;
-  usuarioLogueado :Informacion | null;
+  usuarioLogueado: Informacion | null;
+  mostrarCard: boolean = true;
 
-  constructor(public clienteService: ClienteService, public empleadoService: EmpleadoService, private router: Router) {
+  constructor(
+    public clienteService: ClienteService,
+    public empleadoService: EmpleadoService,
+    private router: Router
+  ) {
     this.sigCliente = this.clientes[0];
     console.log(this.sigCliente)
     this.usuarioLogueado = this.empleadoService.usuarioLogeado
@@ -24,16 +29,18 @@ export class InicioComponent {
   ngOnInit(): void {
     this.llenarData();
     console.dir(this.clientes)
+    console.log("Valor de mostrarCard: " + this.mostrarCard)
   }
 
   llenarData() {
     this.clienteService.getAllClientes().subscribe(data => {
-      this.clientes = data.data.filter(cliente =>cliente.enEspera<=1); //filtro para traer solo los clientees que estan en espera
+      this.clientes = data.data.filter(cliente => cliente.enEspera <= 1); //filtro para traer solo los clientees que estan en espera
     })
   }
 
   llamarPrioridad() {
     if (this.clientes.length > 0) {
+      this.sigCliente = this.clientes[0];
       for (let cliente of this.clientes) {
         if (cliente.enEspera == 1) {
           this.sigCliente = cliente;
@@ -42,30 +49,24 @@ export class InicioComponent {
       }
     }
   }
-
-  llamarSig() {
-    this.llenarData()
-    if (this.clientes.length > 0) {
-      for (let cliente of this.clientes) {
-        if (cliente.enEspera == 0) {
-          this.sigCliente = cliente;
-          break;
-        }
-      }
-    }
-  }
+  
 
   llamar() {
-    this.llamarSig();
+    //this.llamarSig();
+    console.log("Valor de mostrarCard: " + this.mostrarCard)
     this.llamarPrioridad();
     this.actualizarCliente()
     this.llenarData()
+    this.cambiarValor()
+    console.log("se supone que cambio ")
+    console.log("Valor de mostrarCard: " + this.mostrarCard)
+
   }
 
   actualizarCliente() {
     const id = this.sigCliente.id; // ID del cliente
     const usuarioDeAtencion = this.usuarioLogueado?.Usuario; // Usuario que atiende
-    
+
     this.clienteService.updateCliente(id, usuarioDeAtencion).subscribe({
       next: (response) => {
         if (response.status === 'success') {
@@ -79,12 +80,13 @@ export class InicioComponent {
       }
     });
   }
-  
-  finTurno(id: number){
+
+  finTurno(id: number) {
     this.clienteService.finalizarTurno(id).subscribe({
       next: (response) => {
         if (response.status === 'success') {
           console.log('Estado actualizado correctamente:', response.message);
+          this.cambiarValor();
           this.router.navigate(['/home/inicio']);
         } else {
           console.warn('Error al actualizar estado:', response.message);
@@ -102,6 +104,9 @@ export class InicioComponent {
   }
   onMouseLeave() {
     this.isHovered = false;
+  }
+  cambiarValor() {
+    this.mostrarCard = !this.mostrarCard
   }
 
 }
