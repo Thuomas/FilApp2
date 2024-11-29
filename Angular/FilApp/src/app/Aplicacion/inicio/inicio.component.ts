@@ -85,7 +85,7 @@ export class InicioComponent {
       next: (response) => {
         if (response.status === 'success') {
           console.log('Estado actualizado correctamente:', response.message);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/home/inicio']);
         } else {
           console.warn('Error al actualizar estado:', response.message);
         }
