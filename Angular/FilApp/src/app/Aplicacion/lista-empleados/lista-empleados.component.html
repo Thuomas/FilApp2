@@ -12,20 +12,18 @@
         <div class="d-flex justify-content-between align-items-center">
           <div class="me-2">
             <i class="bi bi-person-circle"></i>
-            {{empleado.Apellido}}, {{empleado.Nombre}} <span> {{empleado.idCargo}} </span>
+            {{empleado.Apellido}}, {{empleado.Nombre}} 
           </div>
 
-          <div class="dropdown">
-            <button class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              Asignar
+          <div >
+            <button class="btn btn-danger" >
+              Eliminar
             </button>
-            <ul class="dropdown-menu">
-              <!-- estas opciones vienen del servicio "cargo", deberia 
-                    mostrar las opciones que se configuraron en la app -->
+            <!-- <ul class="dropdown-menu">
               <li *ngFor="let cargo of cargos">
                 <a class="dropdown-item" href="#">{{cargo.Tipo}}</a>
               </li>
-            </ul>
+            </ul> -->
           </div>
         </div>
       </li>
@@ -36,18 +34,5 @@
 <br>
 <div>
   <app-agregar-empleado></app-agregar-empleado>
-  <div>
-    <p>HolaAAAAAAAAAAAAAAA</p>
-    <p>{{empMostrar.Apellido}}</p>
-    <p>{{empMostrar.Domicilio}}</p>
-    <p>{{empMostrar.Localidad}}</p>
-    <p>{{empMostrar.Mail}}</p>
-    <p>{{empMostrar.Nombre}}</p>
-    <p>{{empMostrar.Usuario}}</p>
-    <p>{{empMostrar.id}}</p>
-    <p>{{empMostrar.idCargo}}</p>
-    <p>{{empMostrar.idVendedor}}</p>
-    <p>{{empMostrar.pass}}</p>
-    
-  </div>
+  
 </div>

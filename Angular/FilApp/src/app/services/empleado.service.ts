@@ -10,11 +10,12 @@ import { catchError, map } from 'rxjs/operators';
 export class EmpleadoService {
 
   private urlApi = "/api/Empleados/empleados.php";
+  private urlApiPost = "/api/Empleados/Pempleados.php";
 
   constructor(private http: HttpClient) {
 
   }
-  usuarioLogeado: Informacion | null = null ;
+  usuarioLogeado: Informacion | null = null;
 
   getAllEmpleados(): Observable<Empleado> {
     return this.http.get<Empleado>(this.urlApi);
@@ -30,15 +31,36 @@ export class EmpleadoService {
     );
   }
 
-  addEmpleado(empleado: Empleado): Observable<Empleado> {
-    return this.http.post<Empleado>(this.urlApi, empleado)
-  }
-
   updateEmpleado(id: number, empleado: Informacion): Observable<Empleado> {
     return this.http.put<Empleado>(this.urlApi, { id, empleado });
   }
 
   deleteEmpleado(id: number): Observable<Empleado> {
-    return this.http.delete<Empleado>(`${this.urlApi}/${id}`);
+    return this.http.delete<Empleado>(`${this.urlApi} / ${id}`);
   }
+
+  addEmpleado(
+    nombre: string,
+    apellido: string,
+    usuario: string,
+    pass: string,
+    idCargo: number,
+    idVendedor: number,
+    mail: string
+  ): Observable<any> {
+    const body = {
+      nombre,
+      apellido,
+      usuario,
+      pass,
+      idCargo,
+      idVendedor,
+      mail
+    };
+
+    return this.http.post(`${this.urlApiPost}`, body);
+  }
+
 }
+
+
